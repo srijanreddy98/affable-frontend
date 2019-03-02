@@ -1,0 +1,13 @@
+<!-- <nb-card>
+    <nb-radio-group [(ngModel)]="option">
+      <nb-radio (click) = "emitEvent()" *ngFor="let option of options" [value]="option.value">
+        {{ option.label }}
+      </nb-radio>
+    </nb-radio-group>
+</nb-card> -->
+
+<nb-card>
+    <nb-select outline status="info" placeholder="Sort By" [(ngModel)]="option">
+      <nb-option *ngFor="let option of options" (click) = "emitEvent()"  [value]="option.value">{{option.label}}</nb-option>
+    </nb-select>
+  </nb-card>

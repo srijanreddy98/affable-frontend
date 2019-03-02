@@ -1,0 +1,55 @@
+<nb-card>
+  <nb-card-header class="header" style="color: black">
+    <nb-user size="xlarge" [name]="'@' + influencer.username" [title]="influencer.biography" [picture]="influencer.picture"
+      [badgeText]="getText(influencer.fullName, influencer.username)" badgeStatus="info" badgePosition="bottom end">
+    </nb-user>
+  </nb-card-header>
+  <nb-card-body>
+    <div fxLayout="row">
+      <div fxFlex="40">
+        <nb-card>
+          <nb-card-header class="header" fxLayout = "row"><span fxFlex = "90">Stats</span>  <span fxFlex = "10"><mat-icon>trending_up</mat-icon></span></nb-card-header>
+          <nb-list>
+            <nb-list-item fxLayout="row" fxLayoutAlign="center center">
+              <mat-icon fxFlex=20 style="height: 16px; width:16px">people</mat-icon>
+              <button fxFlex=80 fxLayout="row" fxLayoutAlign="center center" nbButton outline status="info">
+                <div fxLayout="row" fxLayoutAlign="center center"></div>
+                <span>{{influencer.followerCount | number}}</span>
+              </button>
+            </nb-list-item>
+            <nb-list-item fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon fxFlex=20 style="height: 16px; width:16px">mode_comment</mat-icon>
+                <button fxFlex=80 fxLayout="row" fxLayoutAlign="center center" nbButton outline status="info">
+                  <div fxLayout="row" fxLayoutAlign="center center"></div>
+                  <span>{{influencer.stats.engagement.avgCommentsRatio *
+                      influencer.followerCount | number: '1.0-0'}}</span>
+                </button>
+              </nb-list-item>
+              <nb-list-item fxLayout="row" fxLayoutAlign="center center">
+                  <mat-icon fxFlex=20 style="height: 16px; width:16px">thumb_up</mat-icon>
+                  <button fxFlex=80 fxLayout="row" fxLayoutAlign="center center" nbButton outline status="info">
+                    <div fxLayout="row" fxLayoutAlign="center center"></div>
+                    <span>{{influencer.stats.engagement.avgLikesRatio *
+                        influencer.followerCount| number: '1.0-0'}}</span>
+                  </button>
+                </nb-list-item>
+          </nb-list>
+        </nb-card>
+      </div>
+      <div fxFlex="10"></div>
+      <div fxFlex="50">
+        <nb-card>
+            <nb-card-header class="header" fxLayout = "row"><span fxFlex = "90">Interests</span>  <span fxFlex = "10"><mat-icon>work_outline</mat-icon></span></nb-card-header>
+          <nb-list>
+            <nb-list-item fxLayout = "row" fxLayoutAlign = "center center" *ngFor="let interest of influencer.stats.interests">
+                <button fxFlex = "100" fxLayout="row" fxLayoutAlign="center center" nbButton outline status="info">
+                    <div fxLayout="row" fxLayoutAlign="center center"></div>
+                    <span>{{interest}}</span>
+                  </button>
+            </nb-list-item>
+          </nb-list>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

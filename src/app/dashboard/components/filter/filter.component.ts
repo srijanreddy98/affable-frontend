@@ -11,6 +11,10 @@ import { InfluencersService } from 'src/app/services/influencers.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
+  /**
+   * Since there are only three values I have used two way binding
+   * Normally I would use form groups and formcontrol which I have done for the chip inputs
+   */
   @Output() filtered = new EventEmitter<any>();
   options = [
     { value: true, label: 'Should Contain One' },

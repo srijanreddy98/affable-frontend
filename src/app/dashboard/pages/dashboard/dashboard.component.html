@@ -3,13 +3,10 @@
   <div fxFlex="30"></div>
 
   <div fxFlex="55">
-    <nb-list nbInfiniteList listenWindowScroll [threshold]="1" (bottomThreshold)="loadNext()">
+    <nb-list nbInfiniteList listenWindowScroll [threshold]="10" (bottomThreshold)="loadNext()">
       <nb-list-item *ngFor="let influencer of influencers">
         <app-influencer [influencer]="influencer"></app-influencer>
       </nb-list-item>
-      <!-- <nb-list-item *ngFor="let _ of placeholders">
-      <nb-news-post-placeholder></nb-news-post-placeholder>
-    </nb-list-item> -->
     </nb-list>
     <nb-card *ngIf = "showSpinner" [nbSpinner]="showSpinner" nbSpinnerStatus="info">
       <nb-card-body>

@@ -1,7 +1,7 @@
 <nb-card>
   <nb-card-header class="header" style="color: black">
     <nb-user size="xlarge" [name]="'@' + influencer.username" [title]="influencer.biography" [picture]="influencer.picture"
-      [badgeText]="getText(influencer.fullName, influencer.username)" badgeStatus="info" badgePosition="bottom end">
+      [badgeText]="influencer.initials" badgeStatus="info" badgePosition="bottom end">
     </nb-user>
   </nb-card-header>
   <nb-card-body>
@@ -21,16 +21,14 @@
                 <mat-icon fxFlex=20 style="height: 16px; width:16px">mode_comment</mat-icon>
                 <button fxFlex=80 fxLayout="row" fxLayoutAlign="center center" nbButton outline status="info">
                   <div fxLayout="row" fxLayoutAlign="center center"></div>
-                  <span>{{influencer.stats.engagement.avgCommentsRatio *
-                      influencer.followerCount | number: '1.0-0'}}</span>
+                  <span>{{influencer.comments| number: '1.0-0'}}</span>
                 </button>
               </nb-list-item>
               <nb-list-item fxLayout="row" fxLayoutAlign="center center">
                   <mat-icon fxFlex=20 style="height: 16px; width:16px">thumb_up</mat-icon>
                   <button fxFlex=80 fxLayout="row" fxLayoutAlign="center center" nbButton outline status="info">
                     <div fxLayout="row" fxLayoutAlign="center center"></div>
-                    <span>{{influencer.stats.engagement.avgLikesRatio *
-                        influencer.followerCount| number: '1.0-0'}}</span>
+                    <span>{{influencer.likes| number: '1.0-0'}}</span>
                   </button>
                 </nb-list-item>
           </nb-list>

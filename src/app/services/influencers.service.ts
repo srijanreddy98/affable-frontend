@@ -8,14 +8,10 @@ export class InfluencersService {
 
   constructor(private http: HttpClient) { }
 
-  getInfluencers(offset: number, body) {
-    return this.http.post(`/api/noInterests?offset=${offset}`, body);
+  getInfluencers(body, offset) {
+    return this.http.post(`/api/interests?offset=${offset}`, body.filters);
   }
   getInterests() {
     return this.http.get(`/api/allInterests`);
-  }
-  getFilteredInterests(body, offset: number) {
-    console.log(body, offset);
-    return this.http.post(`/api/interests?offset=${offset}`, body.filters);
   }
 }

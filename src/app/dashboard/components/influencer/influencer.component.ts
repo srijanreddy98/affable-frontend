@@ -10,17 +10,16 @@ export class InfluencerComponent implements OnInit {
   constructor() { }
   @Input() influencer: any;
   ngOnInit() {
+    this.influencer.initials = this.getInitials();
   }
-  getText(name: string, username: string) {
-    if (name !== '') {
-      let arr = name.split(' ');
-      name = '';
-      for (let i of arr) {
-        name += i[0];
-      }
-      return name;
-    } else {
-      return username[0];
+  getInitials() {
+    if (this.influencer.name === '') {
+      return this.influencer.username[0];
     }
+    let name = '';
+    for (const i of this.influencer.fullName.split(' ')) {
+      name += i[0];
+    }
+    return name;
   }
 }

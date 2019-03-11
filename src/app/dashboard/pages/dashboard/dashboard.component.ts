@@ -12,7 +12,6 @@ export class DashboardComponent implements OnInit {
   showSpinner = false;
   influencers = [];
   count = 0;
-  filter = false;
   filters: any;
   ngOnInit() {
     this.filters = {
@@ -21,13 +20,13 @@ export class DashboardComponent implements OnInit {
       desc: true,
       sortBase: 0
     };
-    this.fetchInfluencers();
+    this.fetchInfluencers(this.filters);
   }
-  fetchInfluencers() {
+  fetchInfluencers(filters) {
     this.showSpinner = true;
-    this.influencerService.getInfluencers(this.count, this.filters).subscribe(
+    this.influencerService.getInfluencers({filters}, this.count).subscribe(
       res => {
-// tslint:disable-next-line: curly
+        // tslint:disable-next-line: curly
         if (this.count === 0) this.influencers = [];
         this.influencers = [...this.influencers, ...JSON.parse(JSON.stringify(res))];
         this.showSpinner = false;
@@ -35,35 +34,13 @@ export class DashboardComponent implements OnInit {
       err => console.log(err)
     );
   }
-  fetchFilteredInfluencers(filters) {
-    this.showSpinner = true;
-    this.influencerService.getFilteredInterests({filters}, this.count).subscribe(
-      res => {
-// tslint:disable-next-line: curly
-        if (this.count === 0) this.influencers = [];
-        this.influencers = [...this.influencers, ...JSON.parse(JSON.stringify(res))];
-        this.showSpinner = false;
-      },
-      err => console.log(err)
-    );
-  }
-  loadNext() {
+  fetchNextSet() {
     this.count += 1;
-    console.log(this.filters);
-    if (this.filters.interests.length === 0) {
-      this.fetchInfluencers();
-    } else {
-      this.fetchFilteredInfluencers(this.filters);
-    }
+    this.fetchInfluencers(this.filters);
   }
-  filterInfluencers(e) {
-    this.filter = e.filter;
+  filterInfluencers(filters) {
     this.count = 0;
-    this.filters = e.filters;
-    if (this.filters.interests.length === 0) {
-      this.fetchInfluencers();
-    } else {
-      this.fetchFilteredInfluencers(e.filters);
-    }
+    this.filters = filters;
+    this.fetchInfluencers(filters);
   }
 }

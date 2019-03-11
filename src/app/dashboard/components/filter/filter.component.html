@@ -3,13 +3,13 @@
   <nb-card-body fxLayout = "column">
     <mat-form-field fxFlex = "100" class="example-chip-list">
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let interest of interests" [selectable]="selectable" [removable]="removable" (removed)="remove(interest)">
+        <mat-chip *ngFor="let interest of interests" [selectable]="true" [removable]="true" (removed)="remove(interest)">
           {{interest}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
         </mat-chip>
         <input nbTooltip="Start typing Interests here.." nbTooltipPlacement="top" nbTooltipStatus="info" placeholder="New Interest..."
           #interestsInput [formControl]="interestCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
@@ -34,6 +34,6 @@
         <mat-option (click)="emitEvent()" *ngFor="let option of sorting" [value]="option.value">{{option.label}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button nbButton outline (click)="emitEvent()">Filter</button>
+    <button nbButton outline (click)="emitEvent()" status="info">Filter</button>
   </nb-card-body>
 </nb-card>

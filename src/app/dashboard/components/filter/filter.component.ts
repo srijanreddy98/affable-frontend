@@ -32,6 +32,7 @@ export class FilterComponent implements OnInit {
     { value: 1, label: 'Comments' },
     { value: 2, label: 'Likes' }];
   sortBase = 0;
+  searchBio = '';
 
   chipInput: ChipInput;
 
@@ -61,7 +62,7 @@ export class FilterComponent implements OnInit {
     );
   }
 
-  add(event: MatChipInputEvent): void {
+  addChip(event: MatChipInputEvent): void {
     if (!this.matAutocomplete.isOpen) {
       const input = event.input;
       const value = event.value;
@@ -78,19 +79,19 @@ export class FilterComponent implements OnInit {
     }
   }
 
-  remove(interest: string): void {
+  removeChip(interest: string): void {
     const index = this.interests.indexOf(interest);
 
     if (index >= 0) {
       this.interests.splice(index, 1);
       this.autoCompleteInterests = this.allInterests.filter((i) => this.interests.indexOf(i) < 0);
-      this.emitEvent();
+      this.emitFilterEvent();
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.interests.push(event.option.viewValue);
-    this.emitEvent();
+    this.emitFilterEvent();
     this.autoCompleteInterests = this.allInterests.filter((i) => this.interests.indexOf(i) < 0);
     this.interestsInput.nativeElement.value = '';
     this.interestCtrl.setValue(null);
@@ -100,9 +101,9 @@ export class FilterComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.autoCompleteInterests.filter(i => i.toLowerCase().indexOf(filterValue) === 0);
   }
-  emitEvent() {
+  emitFilterEvent() {
     // tslint:disable-next-line: max-line-length
-    this.filtered.emit({ interests: this.interests, sortBase: this.sortBase, desc: this.desc, shouldContainOne: this.shouldContainOne});
+    this.filtered.emit({ interests: this.interests, sortBase: this.sortBase, desc: this.desc, shouldContainOne: this.shouldContainOne, bio: this.searchBio});
   }
   setChipInputProps() {
     this.chipInput.visible = true;

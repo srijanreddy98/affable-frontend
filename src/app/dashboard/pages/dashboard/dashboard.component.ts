@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit {
       interests: [],
       shouldContainOne: true,
       desc: true,
-      sortBase: 0
+      sortBase: 0,
+      bio: ''
     };
     this.fetchInfluencers(this.filters);
   }

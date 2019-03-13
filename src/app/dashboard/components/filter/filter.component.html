@@ -1,16 +1,17 @@
 <nb-card style="padding: 40px;">
   <nb-card-header class = "header">Filters</nb-card-header>
   <nb-card-body fxLayout = "column">
+      <input class="input" matInput fxFlex = "100" type="text" placeholder="Search Bio" [(ngModel)]="searchBio" [ngModelOptions]="{standalone: true}">
     <mat-form-field fxFlex = "100" class="example-chip-list">
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let interest of interests" [selectable]="true" [removable]="true" (removed)="remove(interest)">
+        <mat-chip *ngFor="let interest of interests" [selectable]="true" [removable]="true" (removed)="removeChip(interest)">
           {{interest}}
           <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
         </mat-chip>
         <input nbTooltip="Start typing Interests here.." nbTooltipPlacement="top" nbTooltipStatus="info" placeholder="New Interest..."
           #interestsInput [formControl]="interestCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList"
           [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
-          (matChipInputTokenEnd)="add($event)">
+          (matChipInputTokenEnd)="addChip($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let interest of filteredInterests | async" [value]="interest">
@@ -20,20 +21,20 @@
     </mat-form-field>
     <mat-form-field fxFlex = "100" nbTooltip="Select how do you want to sort.." nbTooltipPlacement="top" nbTooltipStatus="info">
       <mat-select [(value)]="sortBase">
-        <mat-option (click)="emitEvent()" *ngFor="let option of sortedBy" [value]="option.value">{{option.label}}</mat-option>
+        <mat-option (click)="emitFilterEvent()" *ngFor="let option of sortedBy" [value]="option.value">{{option.label}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex = "100" nbTooltip="Do you want them to have all the intrests or is one of them enough?" nbTooltipPlacement="top"
       nbTooltipStatus="info">
       <mat-select [(value)]="shouldContainOne">
-        <mat-option (click)="emitEvent()" *ngFor="let option of options" [value]="option.value">{{option.label}}</mat-option>
+        <mat-option (click)="emitFilterEvent()" *ngFor="let option of options" [value]="option.value">{{option.label}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex = "100" nbTooltip="Ascending or descending" nbTooltipPlacement="top" nbTooltipStatus = "info">
       <mat-select  [(value)]="desc">
-        <mat-option (click)="emitEvent()" *ngFor="let option of sorting" [value]="option.value">{{option.label}}</mat-option>
+        <mat-option (click)="emitFilterEvent()" *ngFor="let option of sorting" [value]="option.value">{{option.label}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button nbButton outline (click)="emitEvent()" status="info">Filter</button>
+    <button nbButton outline (click)="emitFilterEvent()" status="info">Filter</button>
   </nb-card-body>
 </nb-card>

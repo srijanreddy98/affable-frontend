@@ -6,7 +6,7 @@ import { InfluencerComponent } from './components/influencer/influencer.componen
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FilterComponent } from './components/filter/filter.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -34,7 +34,8 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     NbSelectModule,
     MatSelectModule,
-    NbTooltipModule
+    NbTooltipModule,
+    MatInputModule
   ]
 })
 export class DashboardModule { }
